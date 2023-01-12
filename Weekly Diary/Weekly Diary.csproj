@@ -74,6 +74,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\WeeklyDiaryModel1.cs" />
@@ -91,9 +95,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Fonts\beer-money12.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -102,6 +107,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\powerblue.png" />
+    <Resource Include="Image\powerpurple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fonts\beer-money12.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\bAddpurple.png" />
+    <Resource Include="Image\bAddblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\bDrawblue.png" />
+    <Resource Include="Image\bDrawpurple.png" />
+    <Resource Include="Image\bLeftblue.png" />
+    <Resource Include="Image\bLeftpurple.png" />
+    <Resource Include="Image\bMinusblue.png" />
+    <Resource Include="Image\bMinuspurple.png" />
+    <Resource Include="Image\bOkblue.png" />
+    <Resource Include="Image\bOkpurple.png" />
+    <Resource Include="Image\bRightblue.png" />
+    <Resource Include="Image\bRightpurple.png" />
+    <Resource Include="Image\bVoiceblue.png" />
+    <Resource Include="Image\bVoicepurple.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

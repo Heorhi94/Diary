@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Weekly_Diary.Models;
 using Weekly_Diary.Service;
 
@@ -26,6 +15,7 @@ namespace Weekly_Diary
         private readonly string Path = $"{Environment.CurrentDirectory}\\WeeklyDiaryModels.json";
         private BindingList<WeeklyDiaryModel1> modelsDataList;
         private SaveLoad saveLoad;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -43,7 +33,8 @@ namespace Weekly_Diary
                 Close();
             }           
           
-            Week.ItemsSource = modelsDataList;
+           /* Week.ItemsSource = modelsDataList;
+            Affairs.ItemsSource = modelsDataList;*/
             modelsDataList.ListChanged += ModelsDataList_ListChanged;
         }
 
@@ -61,6 +52,52 @@ namespace Weekly_Diary
                     Close();
                 }
             }
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Week_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnVoice_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDraw_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void btnOk_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

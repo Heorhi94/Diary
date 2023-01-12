@@ -5,15 +5,81 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Weekly_Diary"
         mc:Ignorable="d"
-        Title="Weekly Diary" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Weekly Diary" Height="450" Width="600" Loaded="Window_Loaded"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+
+    <Window.Resources>
+        <FontFamily x:Key="MyFont">Fonts/beer-money12.ttf#My Font</FontFamily>
+    </Window.Resources>
     <Grid>
-        <DataGrid x:Name="Week" FontSize="16" FontWeight="Heavy" Margin="10" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path = CreateDate}" IsReadOnly="True" Header="Date" Width="180"/>
-                <DataGridCheckBoxColumn Binding="{Binding Path=IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
-                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="Affairs" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Border Background="#303135"
+                CornerRadius="10"
+                Opacity="0.95"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnClose"
+                    Cursor="Hand"
+                    Style="{StaticResource ButtonCloseStyle}"
+                    Click="btnClose_Click" Height="35" Width="35"/>
+            <Button x:Name="btnAdd"
+                    Style="{StaticResource ButtonAddStyle}"
+                    Grid.Row="2"
+                    Cursor="Hand"
+                    Click="btnAdd_Click"/>
+            <Button x:Name="btnDel"
+                    Style="{StaticResource ButtonDelStyle}"
+                    Grid.Row="2"
+                    Click="btnDel_Click"/>
+            <Button x:Name="btnVoice"
+                    Style="{StaticResource ButtonVoicesStyle}"
+                    Grid.Row="2"
+                    Click="btnVoice_Click"/>
+            <Button x:Name="btnDraw"
+                    Style="{StaticResource ButtonDrawStyle}"
+                    Grid.Row="2"
+                    Click="btnDraw_Click"/>
+            <Button x:Name="btnNext"
+                    Style="{StaticResource ButtonNextPageStyle}"
+                    Grid.Row="2"
+                    Click="btnNext_Click"/>
+            <Button x:Name="btnOk"
+                    Style="{StaticResource ButtonOkStyle}"
+                    Grid.Row="2"
+                    Click="btnOk_Click"/>
+            <Button x:Name="btnBack"
+                    Style="{StaticResource ButtonBackPageStyle}"
+                    Grid.Row="2"
+                    Click="btnBack_Click"/>
+
+
+            <Border Grid.Row="1"
+                    Opacity="0.9"
+                    CornerRadius="10"
+                    Margin="25,0,25,10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,5">
+                        <GradientStop Color="#c816" Offset="0.0"/>
+                        <GradientStop Color="#E6D941" Offset="0.4"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border Grid.Row="1"
+                        Background="#D1DBE4"
+                        CornerRadius="10"
+                        Opacity="0.09"
+                        Margin="15"/>
+            </Border>
+            
+
+
+        </Grid>
+
 
     </Grid>
 </Window>

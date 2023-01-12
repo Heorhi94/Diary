@@ -1,0 +1,16 @@
+ <DataGrid x:Name="Date" FontSize="16" FontWeight="Heavy" Margin="10,75,620,75" AutoGenerateColumns="False" SelectionChanged="Week_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding Path = CreateDate}" IsReadOnly="True" Header="Date" Width="180"/>
+                <DataGridCheckBoxColumn Binding="{Binding Path=IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="Done" FontSize="16" FontWeight="Heavy" Margin="320,75,320,75">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="Affairs" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="Affairs" FontSize="16" FontWeight="Heavy" Margin="320,75,320,75">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="Affairs" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
