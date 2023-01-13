@@ -58,7 +58,9 @@
                     Grid.Row="2"
                     Click="btnBack_Click"/>
 
-
+            <TextBox x:Name="TextBox" Margin="18,12,300,13">
+                
+            </TextBox>
             <Border Grid.Row="1"
                     Opacity="0.9"
                     CornerRadius="10"

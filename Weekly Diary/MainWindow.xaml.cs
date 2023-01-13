@@ -4,6 +4,10 @@ using System.Windows;
 using System.Windows.Controls;
 using Weekly_Diary.Models;
 using Weekly_Diary.Service;
+using Weekly_Diary.ParseWeather;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Weekly_Diary
 {
@@ -15,10 +19,12 @@ namespace Weekly_Diary
         private readonly string Path = $"{Environment.CurrentDirectory}\\WeeklyDiaryModels.json";
         private BindingList<WeeklyDiaryModel1> modelsDataList;
         private SaveLoad saveLoad;
+        PWeather weather = new PWeather();
 
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -36,6 +42,7 @@ namespace Weekly_Diary
            /* Week.ItemsSource = modelsDataList;
             Affairs.ItemsSource = modelsDataList;*/
             modelsDataList.ListChanged += ModelsDataList_ListChanged;
+            TextBox.Text = weather.Parse();
         }
 
         private void ModelsDataList_ListChanged(object sender, ListChangedEventArgs e)
