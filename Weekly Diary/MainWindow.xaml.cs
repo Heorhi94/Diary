@@ -8,6 +8,8 @@ using Weekly_Diary.ParseWeather;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace Weekly_Diary
 {
@@ -42,7 +44,17 @@ namespace Weekly_Diary
            /* Week.ItemsSource = modelsDataList;
             Affairs.ItemsSource = modelsDataList;*/
             modelsDataList.ListChanged += ModelsDataList_ListChanged;
-            TextBox.Text = weather.Parse();
+            OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weather.Parse());
+          /*  BitmapImage d = new BitmapImage();
+            d.UriSource = new Uri(open.weathers.name);
+            panel1.Source = d;*/
+            //condition.Content = open.weathers[0].main;
+            conditionWeather.Content = open.weathers.description;
+            temperature.Content = open.main.temp.ToString("0.##");
+            speedWind.Content = open.wind.speed.ToString();
+            humidity.Content = open.main.humidity.ToString();
+            pressure.Content =((int)open.main.pressure).ToString();
+
         }
 
         private void ModelsDataList_ListChanged(object sender, ListChangedEventArgs e)

@@ -11,8 +11,9 @@ namespace Weekly_Diary.ParseWeather
     {
         public int id;
         public string main;
-        public string discrition;
-        public string icon;
+        public string description;
+        public static string icon;
+        public string name = $"ImageWeather/{icon}.png";
         public Bitmap Icon
         { 
             get
