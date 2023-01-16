@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Weekly_Diary.ParseWeather
 {
-    internal class weather
+     class weather
     {
+
         public int id;
         public string main;
         public string description;
-        public static string icon;
-        public string name = $"ImageWeather/{icon}.png";
+        public static string icon = "01d";
+        public string name = $"/{icon}.png";
         public Bitmap Icon
         { 
             get

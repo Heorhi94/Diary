@@ -20,7 +20,7 @@
                 Opacity="0.95">
 
         </Border>
-        <Grid>
+        <Grid HorizontalAlignment="Right">
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
@@ -59,15 +59,19 @@
                     Style="{StaticResource ButtonBackPageStyle}"
                     Grid.Row="2"
                     Click="btnBack_Click"/>
-            <Label x:Name="condition" Margin="70,8,430,37" Width="100" Content="sdfsdfsdf\"/>
+            <Label x:Name="condition"
+                   Margin="70,8,430,37" 
+                   Width="100"
+                   Content="sdfsdfsdf\"
+                   FontFamily="MyFont"/>
             <Label x:Name="conditionWeather" Width="100" Height="30" Margin="70,39,430,7" Content="dfsdvsfdvsf"></Label>
             <Label x:Name="temperature" Width="100" Height="30" Margin="172,8,328,37" Content="asdssd"></Label>
             <Label x:Name="speedWind" Width="100" Height="30" Content="speed wind" Margin="172,39,328,7"></Label>
             <Label x:Name="humidity" Width="100" Height="30" Content="humidity" Margin="273,8,223,37"></Label>
             <Label x:Name="pressure" Width="100" Height="30" Margin="274,38,223,7" Content="pressyre"></Label>
 
-            <Image x:Name="panel1" Width="60" Height="60" Margin="9,8,531,7" RenderTransformOrigin="-3.948,0.58"></Image>
-            
+            <Image x:Name="panel1" Width="60" Height="60" Margin="9,8,531,7">
+            </Image>
             <Border Grid.Row="1"
                     Opacity="0.9"
                     CornerRadius="10"
@@ -79,12 +83,42 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <Border Grid.Row="1"
-                        Background="#D1DBE4"
                         CornerRadius="10"
                         Opacity="0.09"
-                        Margin="15"/>
+                        Margin="15">
+                </Border>
             </Border>
-            
+            <TextBox Grid.Row="1" 
+                     Height="240" Width="500"
+                     Background="#F5DEB3"
+                     Foreground="Black" FontFamily="{DynamicResource MyFont}" FontSize="18" SpellCheck.IsEnabled="True" Language="pl-pl"/>
+            <StackPanel x:Name="panelDraw" Grid.Row="1"
+                        HorizontalAlignment="Right" VerticalAlignment="Top" Height="250" Margin="0,20,40,0" Width="520" Visibility="Collapsed" >
+                <InkCanvas x:Name="draw"
+                           Width="520" Height="180"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Right"
+                           Background="#E6D941"/>
+                <StackPanel Height="70" Orientation="Horizontal">
+                    <Button x:Name="clearDraw"
+                        Content="Clear" 
+                        Width="40" Height="30" 
+                        FontSize="14"
+                        Background="#FFF6F0B7"
+                        Margin="20,20,0,20"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Click="clearDraw_Click">
+                    </Button>
+
+                    <Button x:Name="closeDraw"   
+                        Content="Close"    
+                        Width="40" Height="30"
+                        Click="closeDraw_Click"
+                        Background="#FFF6F0B7" Margin="10,0,0,0">
+                    </Button>
+                </StackPanel>
+            </StackPanel>
 
 
         </Grid>

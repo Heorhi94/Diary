@@ -10,7 +10,7 @@ namespace Weekly_Diary.ParseWeather
     internal class OpenWeather
     {
         public coord coord;
-        public weather weathers;
+        public weather[] weathers;
 
         [JsonProperty("base")]
         public string Base;

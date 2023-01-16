@@ -9,7 +9,7 @@ namespace Weekly_Diary.Models
 {
      class WeeklyDiaryModel1:INotifyPropertyChanged
     {
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.Now.Date;
 
         private bool _isDone;
         public string _text;

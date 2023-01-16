@@ -21,7 +21,7 @@ namespace Weekly_Diary
         private readonly string Path = $"{Environment.CurrentDirectory}\\WeeklyDiaryModels.json";
         private BindingList<WeeklyDiaryModel1> modelsDataList;
         private SaveLoad saveLoad;
-        PWeather weather = new PWeather();
+        PWeather weatherP = new PWeather();
 
         public MainWindow()
         {
@@ -40,16 +40,16 @@ namespace Weekly_Diary
                 MessageBox.Show(ex.Message);
                 Close();
             }           
+            
           
            /* Week.ItemsSource = modelsDataList;
-            Affairs.ItemsSource = modelsDataList;*/
+            Affairs.ItemsSource = modelsDataList;*/ 
             modelsDataList.ListChanged += ModelsDataList_ListChanged;
-            OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weather.Parse());
-          /*  BitmapImage d = new BitmapImage();
-            d.UriSource = new Uri(open.weathers.name);
-            panel1.Source = d;*/
-            //condition.Content = open.weathers[0].main;
-            conditionWeather.Content = open.weathers.description;
+            OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weatherP.Parse());
+           /* BitmapImage d = new BitmapImage(new Uri(open.weathers[0].name));
+            panel1.Source = d;
+            condition.Content = open.weathers[0].main;
+            conditionWeather.Content = open.weathers[0].description;*/
             temperature.Content = open.main.temp.ToString("0.##");
             speedWind.Content = open.wind.speed.ToString();
             humidity.Content = open.main.humidity.ToString();
@@ -100,7 +100,7 @@ namespace Weekly_Diary
 
         private void btnDraw_Click(object sender, RoutedEventArgs e)
         {
-
+            panelDraw.Visibility = Visibility.Visible;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
@@ -117,6 +117,17 @@ namespace Weekly_Diary
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void clearDraw_Click(object sender, RoutedEventArgs e)
+        {
+            draw.Strokes.Clear();
+        }
+
+        private void closeDraw_Click(object sender, RoutedEventArgs e)
+        {
+            draw.Strokes.Clear();
+            panelDraw.Visibility =Visibility.Collapsed;
         }
     }
 }
