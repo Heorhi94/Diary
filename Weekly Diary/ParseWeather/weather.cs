@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Weekly_Diary.ParseWeather
 {
@@ -13,14 +15,44 @@ namespace Weekly_Diary.ParseWeather
         public int id;
         public string main;
         public string description;
-        public static string icon = "01d";
-        public string name = $"/{icon}.png";
-        public Bitmap Icon
-        { 
+        private string icon;
+
+        public BitmapImage Icon
+        {
             get
             {
-                return new Bitmap(Image.FromFile($"ImageWeather/{icon}.png"));
+                Bitmap bitmap = new Bitmap(Image.FromFile($"icon/{icon}.png"));
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                    memory.Position = 0;
+                    BitmapImage bitmapimage = new BitmapImage();
+                    bitmapimage.BeginInit();
+                    bitmapimage.StreamSource = memory;
+                    bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapimage.EndInit();
+
+                    return bitmapimage;
+                }
             }
         }
+
+      public  BitmapImage BMPI(Bitmap bitmap)
+        {
+           
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
+            }
+        }
+
     }
 }

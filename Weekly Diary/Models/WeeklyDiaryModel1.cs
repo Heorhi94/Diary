@@ -1,32 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Weekly_Diary.Models
 {
+     
      class WeeklyDiaryModel1:INotifyPropertyChanged
     {
         public DateTime CreateDate { get; set; } = DateTime.Now.Date;
 
-        private bool _isDone;
-        public string _text;
+        private List<RichTextBox> _text;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public bool IsDone
-        {
-            get { return _isDone; }
-            set 
-            {
-                if(_isDone == value) return;
-                _isDone = value; 
-                OnPropertyChanged("IsDone");
-            }
-        }
-        public string Text 
+     
+
+        public List<RichTextBox> Text 
         {
             get { return _text; }
             set 
