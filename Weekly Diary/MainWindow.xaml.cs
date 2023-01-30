@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Windows.Documents;
 using System.IO;
+using System.Text;
 
 namespace Weekly_Diary
 {
@@ -21,7 +22,6 @@ namespace Weekly_Diary
     {
         private readonly string Path = $"{Environment.CurrentDirectory}\\WeeklyDiaryModels.json";
         private BindingList<WeeklyDiaryModel> modelsDataList;
-        private SaveLoad saveLoad;
         PWeather weatherP = new PWeather();
         List<RichTextBox> listDiary=new List<RichTextBox>();
         
@@ -31,6 +31,46 @@ namespace Weekly_Diary
             InitializeComponent();
             
         }
+        private void SaveRichTextBoxContents()
+        {
+            using (FileStream fs = File.Create(Path))
+            {
+                int index = 0;
+                foreach (var richTextBox in listDiary)
+                {
+                    TextRange textRange = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
+                    textRange.Save(fs, DataFormats.Rtf);
+                    if (index != listDiary.Count - 1)
+                    {
+                        fs.Write(Encoding.UTF8.GetBytes("\n"), 0, Encoding.UTF8.GetByteCount("\n"));
+                    }
+                    index++;
+                }
+            }
+        }
+
+
+
+    private void LoadRichTextBoxContent()
+            {
+                foreach (var richTextBox in listDiary)
+                {
+                    if (File.Exists(Path))
+                    {
+                        TextRange textRange = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
+                        using (FileStream fs = File.Open(Path, FileMode.Open))
+                        {
+                            textRange.Load(fs, DataFormats.Rtf);
+                        }
+                    textDiary.Document=listDiary[0].Document;
+                    }
+                }
+            }
+
+
+
+
+
 
         private void SaveRichTextBoxContent()
         {
@@ -55,7 +95,7 @@ namespace Weekly_Diary
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             textDiary.Focus();
-           LoadFromFile(Path);
+            LoadRichTextBoxContent();
             OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weatherP.Parse());                    
             condition.Content = open.weather[0].main;
             conditionWeather.Content = open.weather[0].description;
@@ -76,8 +116,9 @@ namespace Weekly_Diary
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            SaveRichTextBoxContent();
+            
             listDiary.Add(textDiary);
+            SaveRichTextBoxContents();
             textDiary.Document.Blocks.Clear();
             textDiary = new RichTextBox();
 
@@ -112,7 +153,7 @@ namespace Weekly_Diary
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            textDiary.DataContext = listDiary.Count - 1;
+            LoadFromFile(Path);
         }
 
     }

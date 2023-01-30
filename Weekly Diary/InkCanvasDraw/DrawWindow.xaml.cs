@@ -21,8 +21,8 @@ namespace Weekly_Diary
     public partial class DrawWindow : Window
     {
         MainWindow mainWindow;
+        int val = 0;
 
-  
         public DrawWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace Weekly_Diary
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            int val = 0;
+            
             // Save
             RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)draw.Width, (int)draw.Height, 96d, 96d, PixelFormats.Pbgra32);
             renderBitmap.Render(draw);
