@@ -113,7 +113,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\WeeklyDiaryModel1.cs" />
+    <Compile Include="Models\WeeklyDiaryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

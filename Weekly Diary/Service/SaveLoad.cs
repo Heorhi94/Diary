@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using Weekly_Diary.Models;
 
 namespace Weekly_Diary.Service
@@ -19,28 +20,54 @@ namespace Weekly_Diary.Service
             Path = path;
         }
 
-        public BindingList<WeeklyDiaryModel1> LoadData()
+        public void Save(List<RichTextBox> listDiary, string Path)
         {
-            var fileExists = File.Exists(Path);
-            if (!fileExists)
+            var serializer = new JsonSerializer();
+            using (var file = File.CreateText(Path))
             {
-                File.CreateText(Path).Dispose();
-                return new BindingList<WeeklyDiaryModel1>();
+                serializer.Formatting = Formatting.Indented;
+
+                serializer.Serialize(file, listDiary);
             }
-            using (var reader = File.OpenText(Path))
-            {
-                var fileText = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<BindingList<WeeklyDiaryModel1>>(fileText);
-            }
+           
         }
 
-        public void SaveData(object modelDataList)
+      /*  public BindingList<WeeklyDiaryModel1> Load(List<RichTextBox> listDiary, string Path)
         {
-            using(StreamWriter writer = File.CreateText(Path))
+            
+            var serializer = new JsonSerializer();
+            var screens = JsonConvert.DeserializeObject< List < RichTextBox >> (File.ReadAllText(Path));
+
+            listDiary.Clear();
+            foreach (var screen in screens)
             {
-                string output = JsonConvert.SerializeObject(modelDataList);
-                writer.WriteLine(output);
+                listDiary.Add(screen);
             }
-        }
+            
+
+        }*/
+         public BindingList<WeeklyDiaryModel> LoadData()
+         {
+             var fileExists = File.Exists(Path);
+             if (!fileExists)
+             {
+                 File.CreateText(Path).Dispose();
+                 return new BindingList<WeeklyDiaryModel>();
+             }
+             using (var reader = File.OpenText(Path))
+             {
+                 var fileText = reader.ReadToEnd();
+                 return JsonConvert.DeserializeObject<BindingList<WeeklyDiaryModel>>(fileText);
+             }
+         }
+
+         public void SaveData(BindingList<WeeklyDiaryModel>models)
+         {
+             using(StreamWriter writer = File.CreateText(Path))
+             {
+                 string output = JsonConvert.SerializeObject(models);
+                 writer.WriteLine(output);
+             }
+         }
     }
 }
