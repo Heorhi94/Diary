@@ -12,21 +12,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Weekly_Diary.InkCanvasDraw;
 
 namespace Weekly_Diary
 {
-    /// <summary>
-    /// Логика взаимодействия для DrawWindow.xaml
-    /// </summary>
+    
     public partial class DrawWindow : Window
     {
-        MainWindow mainWindow;
-        int val = 0;
+        MainWindow mainWindow= new MainWindow();
+        Random random = new Random();
+        private ColorRGB colorRGB = new ColorRGB();
 
         public DrawWindow(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            colorRGB.mcolor = new ColorRGB();
+            colorRGB.mcolor.red = 0;
+            colorRGB.mcolor.green = 0;
+            colorRGB.mcolor.blue = 0;
+            lColor.Background = new SolidColorBrush(Color.FromRgb(colorRGB.mcolor.red, colorRGB.mcolor.green, colorRGB.mcolor.blue));
         }
 
         private void clearDraw_Click(object sender, RoutedEventArgs e)
@@ -37,33 +42,66 @@ namespace Weekly_Diary
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             
-            // Save
+            SaveInkImage();            
+        }
+
+        public void SaveInkImage()
+        {
+            int val = random.Next(int.MinValue, int.MaxValue);
+            string path = $"{Environment.CurrentDirectory}\\image\\inkImage{val}.png";
+            while (File.Exists(path))
+            {
+                val = random.Next(int.MinValue, int.MaxValue);
+                path = $"{Environment.CurrentDirectory}\\image\\inkImage{val}.png";
+            }
             RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)draw.Width, (int)draw.Height, 96d, 96d, PixelFormats.Pbgra32);
             renderBitmap.Render(draw);
 
             PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
 
-            using (FileStream stream = new FileStream($"D:\\StudiesProject\\C#\\klimekAlgor\\Project\\Weekly Diary\\Weekly Diary\\InkCanvasDraw\\inkImage{val}.png", FileMode.Create))
+            using (FileStream stream = new FileStream(path, FileMode.Create))
             {
                 encoder.Save(stream);
             }
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri($"D:\\StudiesProject\\C#\\klimekAlgor\\Project\\Weekly Diary\\Weekly Diary\\InkCanvasDraw\\inkImage{val}.png", UriKind.Relative);
+            bitmapImage.UriSource = new Uri(path, UriKind.Relative);
             bitmapImage.EndInit();
             Image image = new Image();
             image.Source = bitmapImage;
             InlineUIContainer container = new InlineUIContainer(image);
             mainWindow.textDiary.CaretPosition.InsertTextInRun("");
             mainWindow.textDiary.CaretPosition.Paragraph.Inlines.Add(container);
-            val++;
             Close();
         }
 
         private void closeDraw_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void rgbColor_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as Slider;
+            string name = slider.Name;
+            double value = slider.Value;
+            if (name.Equals("red"))
+            {
+                colorRGB.mcolor.red = Convert.ToByte(value);
+            }
+            if (name.Equals("green"))
+            {
+                colorRGB.mcolor.green = Convert.ToByte(value);
+            }
+            if (name.Equals("blue"))
+            {
+                colorRGB.mcolor.blue = Convert.ToByte(value);
+            }
+
+            colorRGB.clr = Color.FromRgb(colorRGB.mcolor.red, colorRGB.mcolor.green, colorRGB.mcolor.blue);
+            lColor.Background = new SolidColorBrush(Color.FromRgb(colorRGB.mcolor.red, colorRGB.mcolor.green, colorRGB.mcolor.blue));
+            draw.DefaultDrawingAttributes.Color = colorRGB.clr;
         }
     }
 }

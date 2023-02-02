@@ -15,13 +15,13 @@ namespace Weekly_Diary.ParseWeather
         public int id;
         public string main;
         public string description;
-        private string icon;
+        public string icon;
 
         public BitmapImage Icon
         {
             get
             {
-                Bitmap bitmap = new Bitmap(Image.FromFile($"icon/{icon}.png"));
+                Bitmap bitmap = new Bitmap(Image.FromFile($"icons/{icon}.png"));
                 using (MemoryStream memory = new MemoryStream())
                 {
                     bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);

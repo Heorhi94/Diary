@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="InkCanvasDraw\ColorRGB.cs" />
     <Compile Include="InkCanvasDraw\DrawWindow.xaml.cs">
       <DependentUpon>DrawWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +92,7 @@
     <Compile Include="ParseWeather\weather.cs" />
     <Compile Include="ParseWeather\wind.cs" />
     <Compile Include="Service\SaveLoad.cs" />
+    <Compile Include="Voices\Voice.cs" />
     <Page Include="InkCanvasDraw\DrawWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -178,5 +180,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

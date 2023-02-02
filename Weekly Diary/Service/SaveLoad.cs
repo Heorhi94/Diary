@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,68 +7,63 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using Weekly_Diary.Models;
 
 namespace Weekly_Diary.Service
 {
-     class SaveLoad
+    class SaveLoad 
     {
-        private readonly string Path;
-
-        public SaveLoad(string path)
+        public void Save(List<RichTextBox> listDiary, int index, RichTextBox textDiary,string Path,List<string>PathList)
         {
-            Path = path;
+        TextRange doc = new TextRange(textDiary.Document.ContentStart, textDiary.Document.ContentEnd);
+        using (FileStream fs = File.Create(Path))
+        {
+                    
+            doc.Save(fs, DataFormats.Rtf);
+        }
+        listDiary.Add(textDiary);
+         PathList.Add(Path);    
         }
 
-        public void Save(List<RichTextBox> listDiary, string Path)
+        public RichTextBox LoadLastPage(List<RichTextBox> listDiary, int index,RichTextBox textDiary,List<string>PathList)
         {
-            var serializer = new JsonSerializer();
-            using (var file = File.CreateText(Path))
+            string[] files = Directory.GetFiles($"{Environment.CurrentDirectory}\\dataDiary", "*.rtf");
+            string Path;
+            int count = files.Length;
+            try
             {
-                serializer.Formatting = Formatting.Indented;
-
-                serializer.Serialize(file, listDiary);
+                for (int i = 0; i < count; i++)
+                {
+                    Path = files[i];
+                    PathList.Add(Path);
+                    TextRange doc = new TextRange(textDiary.Document.ContentStart, textDiary.Document.ContentEnd);
+                    using (FileStream fs = new FileStream(Path, FileMode.Open))
+                    {
+                        doc.Load(fs, DataFormats.Rtf);
+                    }
+                    listDiary.Add(textDiary);
+                }
+                return listDiary[index];
+            }
+            catch
+            {
+               return textDiary;
             }
            
         }
 
-      /*  public BindingList<WeeklyDiaryModel1> Load(List<RichTextBox> listDiary, string Path)
+        public RichTextBox LoadPage(List<RichTextBox> listDiary, int index, List<string>PathList)
         {
-            
-            var serializer = new JsonSerializer();
-            var screens = JsonConvert.DeserializeObject< List < RichTextBox >> (File.ReadAllText(Path));
-
-            listDiary.Clear();
-            foreach (var screen in screens)
+            TextRange doc = new TextRange(listDiary[index].Document.ContentStart, listDiary[index].Document.ContentEnd);
+            using (FileStream fs = new FileStream(PathList[index], FileMode.Open))
             {
-                listDiary.Add(screen);
+                doc.Load(fs, DataFormats.Rtf);
             }
             
-
-        }*/
-         public BindingList<WeeklyDiaryModel> LoadData()
-         {
-             var fileExists = File.Exists(Path);
-             if (!fileExists)
-             {
-                 File.CreateText(Path).Dispose();
-                 return new BindingList<WeeklyDiaryModel>();
-             }
-             using (var reader = File.OpenText(Path))
-             {
-                 var fileText = reader.ReadToEnd();
-                 return JsonConvert.DeserializeObject<BindingList<WeeklyDiaryModel>>(fileText);
-             }
-         }
-
-         public void SaveData(BindingList<WeeklyDiaryModel>models)
-         {
-             using(StreamWriter writer = File.CreateText(Path))
-             {
-                 string output = JsonConvert.SerializeObject(models);
-                 writer.WriteLine(output);
-             }
-         }
+            return listDiary[index];
+        }
     }
 }
