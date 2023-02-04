@@ -27,7 +27,7 @@
             </Grid.RowDefinitions>
             <Button x:Name="bTools" Grid.Row="2"
                     Style="{StaticResource ButtonToolsPageStyle}" Click="bTools_Click"></Button>
-            <StackPanel x:Name="pTools" Grid.Row ="2" Orientation="Horizontal" HorizontalAlignment="Left" >
+            <StackPanel x:Name="pTools" Grid.Row ="2" Orientation="Horizontal" HorizontalAlignment="Left" Width="450" Margin="0,-3,0,0" >
                 <Button x:Name="btnAdd"
                     Style="{StaticResource ButtonAddStyle}"
                     Cursor="Hand"
@@ -46,10 +46,14 @@
                     Click="btnBack_Click" Margin="0,15,10,0"/>
                 <Button x:Name="btnOk"
                     Style="{StaticResource ButtonOkStyle}"
-                    Click="btnOk_Click" Margin="0,15,10,0"/>
+                    Click="btnOk_Click" Margin="0,15,0,0" Visibility="Collapsed"/>
+                <Button x:Name="bEdit"
+                        Style="{StaticResource ButtonEditStyle}" Margin="0,15,0,0"
+                        Click="bEdit_Click"/>
                 <Button x:Name="btnNext"
                     Style="{StaticResource ButtonNextPageStyle}"
-                    Click="btnNext_Click" Margin="0,15,0,0"/>
+                    Click="btnNext_Click" Margin="10,15,0,0"/>
+                
             </StackPanel>
             <Button x:Name="btnClose"
                     Cursor="Hand"

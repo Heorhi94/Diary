@@ -219,8 +219,8 @@
  <!--#endregion-->
     
 <!--#region Button Ok-->
-    <ImageBrush x:Key="bOkblue" ImageSource="/Image/editBlue.png"/>
-    <ImageBrush x:Key="bOkpurple" ImageSource="/Image/edit.Purple.png"/>
+    <ImageBrush x:Key="bOkblue" ImageSource="/Image/bOkblue.png"/>
+    <ImageBrush x:Key="bOkpurple" ImageSource="/Image/bOkpurple.png"/>
 
     <Style x:Key="ButtonOkStyle" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="35"/>
@@ -249,6 +249,7 @@
     </Style>
 <!--#endregion-->
 
+    <!--#region Button Tools-->
     <ImageBrush x:Key="btoolsBlue" ImageSource="/Image/toolsBlue.png" />
     <ImageBrush x:Key="btoolsPurple" ImageSource="/Image/toolsPurple.png"/>
 
@@ -278,5 +279,133 @@
         </Setter>
     </Style>
     <!--#endregion-->
+
+    <!--#region Button Edit-->
+    <ImageBrush x:Key="bEditBlue" ImageSource="/Image/editBlue.png"/>
+    <ImageBrush x:Key="bEdirPurple" ImageSource="/Image/edit.Purple.png"/>
+
+    <Style x:Key="ButtonEditStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 15 300 0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource bEditBlue}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bEdirPurple}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bEdirPurple}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+
+    <!--#region Button SaveDraw-->
+    <ImageBrush x:Key="bSaveblue" ImageSource="/Image/bSaveBlue.png"/>
+    <ImageBrush x:Key="bSavepurple" ImageSource="/Image/bSavePurple.png"/>
+
+    <Style x:Key="ButtonSaveStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0,15,10,0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource bSaveblue}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bSavepurple}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bSavepurple}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Button ClearDraw-->
+    <ImageBrush x:Key="bClearblue" ImageSource="/Image/bClearBlue.png"/>
+    <ImageBrush x:Key="bClearpurple" ImageSource="/Image/bClearPurple.png"/>
+
+    <Style x:Key="ButtonClearStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10,15,10,0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource bClearblue}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bClearpurple}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bClearpurple}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+
+    <!--#region Button CloseDraw-->
+    <ImageBrush x:Key="bExitblue" ImageSource="/Image/bExitBlue.png"/>
+    <ImageBrush x:Key="bExitpurple" ImageSource="/Image/bExitPurple.png"/>
+
+    <Style x:Key="ButtonCloseDrawStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0,15,10,0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource bExitblue}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bExitpurple}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource bExitpurple}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
+
+
 
 </ResourceDictionary>

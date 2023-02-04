@@ -60,9 +60,18 @@ namespace Weekly_Diary.Service
             using (FileStream fs = new FileStream(PathList[index], FileMode.Open))
             {
                 doc.Load(fs, DataFormats.Rtf);
-            }
-            
+            }      
             return listDiary[index];
+        }
+
+        public void EditPage(List<RichTextBox>listDiary, int index, List<string>PathList)
+        {
+            TextRange doc = new TextRange(listDiary[index].Document.ContentStart, listDiary[index].Document.ContentEnd);
+            using (FileStream fs = new FileStream(PathList[index], FileMode.Create))
+            {
+                doc.Save(fs, DataFormats.Rtf);
+            } 
+            listDiary.Insert(index,listDiary[index]);
         }
     }
 }

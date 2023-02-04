@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Weekly_Diary"
         mc:Ignorable="d"
         Title="DrawWindow" Height="300" Width="550">
+    <Viewbox Stretch="Uniform">
     <Grid>
         <Border Background="#303135"
                 CornerRadius="10"
@@ -20,27 +21,16 @@
                            Background="#E6D941" Margin="0,10,20,0"/>
             <StackPanel Height="70" Orientation="Horizontal">
                 <Button x:Name="clearDraw"
-                        Content="Clear" 
-                        Width="40" Height="30" 
-                        FontSize="14"
-                        Background="#FFF6F0B7"
-                        Margin="20,20,0,20"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
+                        Style="{StaticResource ButtonClearStyle}"
                         Click="clearDraw_Click">
                 </Button>
 
-                <Button x:Name="closeDraw"   
-                        Content="Close"    
-                        Width="40" Height="30"
-                        Click="closeDraw_Click"
-                        Background="#FFF6F0B7" Margin="10,0,0,0">
-                </Button>
+                    <Button x:Name="closeDraw" 
+                            Style="{StaticResource ButtonCloseDrawStyle}"
+                        Click="closeDraw_Click">
+                    </Button>
                 <Button x:Name="Save"
-                         Content="Save" 
-                        Width="40" Height="30" 
-                        FontSize="14"
-                        Background="#FFF6F0B7" Margin="10,0,0,0"
+                        Style="{StaticResource ButtonSaveStyle}"
                             Click="Save_Click"/>
                 <Grid Width="260">
                     <Slider x:Name="red" Background="Red"
@@ -60,10 +50,11 @@
                             ValueChanged="rgbColor_ValueChanged">
                     </Slider>
                 </Grid>
-                <Label x:Name="lColor" Margin="21,0,0,0" Width="30" Height="40">
-                    
+                <Label x:Name="lColor" Margin="21,0,0,0" Width="60" Height="60">
+
                 </Label>
             </StackPanel>
         </StackPanel>
-    </Grid>
+        </Grid>
+    </Viewbox>
 </Window>

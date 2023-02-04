@@ -262,6 +262,14 @@
     <Resource Include="Image\edit.Purple.png" />
     <Resource Include="Image\editBlue.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\bClearBlue.png" />
+    <Resource Include="Image\bClearPurple.png" />
+    <Resource Include="Image\bExitBlue.png" />
+    <Resource Include="Image\bExitPurple.png" />
+    <Resource Include="Image\bSaveBlue.png" />
+    <Resource Include="Image\bSavePurple.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NAudio.Lame.2.0.1\build\NAudio.Lame.targets" Condition="Exists('..\packages\NAudio.Lame.2.0.1\build\NAudio.Lame.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

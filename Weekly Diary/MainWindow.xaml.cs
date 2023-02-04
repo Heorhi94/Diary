@@ -37,12 +37,111 @@ namespace Weekly_Diary
             pTools.Visibility = Visibility.Hidden;
         }
 
+
+        private void AddPage()
+        {
+            UpdatePath();
+            saveLoad.Save(listDiary, textDiary, Path, PathList);
+            textDiary.Document.Blocks.Clear();
+            pageCount++;
+            labelPage.Content = $"Page: {pageCount}";
+            textDiary.Focus();
+        }
+        private void DeletePage()
+        {
+            string[] files = Directory.GetFiles($"{Environment.CurrentDirectory}\\dataDiary", "*.rtf");
+            File.Delete(files[pageCount - 1]);
+            listDiary.Clear();
+            PathList.Clear();
+            pageCount = 1;
+            textDiary = saveLoad.LoadLastPage(listDiary, pageCount - 1, textDiary, PathList);
+            textDiary.Document.Blocks.Clear();
+            pageCount = listDiary.Count + 1;
+            labelPage.Content = $"Page: {pageCount}";
+            textDiary.Focus();
+            textDiary.IsReadOnly = true;
+        }
+        private void NextPage()
+        {
+            pageCount++;
+            if (pageCount > listDiary.Count)
+            {
+                pageCount = listDiary.Count + 1;
+                textDiary.Document.Blocks.Clear();
+                labelPage.Content = $"Page: {pageCount}";
+                btnDel.Visibility = Visibility.Collapsed;
+                bEdit.Visibility = Visibility.Collapsed;
+                textDiary.IsReadOnly = false;
+            }
+            else
+            {
+                VisibilityTools();
+                labelPage.Content = $"Page: {pageCount}";
+                textDiary.Document = saveLoad.LoadPage(listDiary, pageCount - 1, PathList).Document;
+                textDiary.IsReadOnly = true;
+            }
+            textDiary.Focus();
+        }
+
+        private void BackPage()
+        {
+            VisibilityTools();
+            pageCount--;
+            if (pageCount < 1)
+            {
+                pageCount = 1;
+            }
+            else
+            {
+                labelPage.Content = $"Page: {pageCount}";
+                textDiary.Document = saveLoad.LoadPage(listDiary, pageCount - 1, PathList).Document;
+            }
+            textDiary.Focus();
+            textDiary.IsReadOnly = true;
+        }
+
+        private void OkPage()
+        {
+            saveLoad.EditPage(listDiary, pageCount - 1, PathList);
+            listDiary.RemoveAt(pageCount);
+            textDiary.IsReadOnly = true;
+            btnOk.Visibility = Visibility.Collapsed;
+            bEdit.Visibility = Visibility.Visible;
+        }
+
+        private void Tools()
+        {
+            if (istools)
+            {
+                istools = false;
+                pTools.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                istools = true;
+                pTools.Visibility = Visibility.Visible;
+                DoubleAnimation animation = new DoubleAnimation();
+                animation.From = 0;
+                animation.To = pTools.ActualWidth;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(1));
+
+                pTools.BeginAnimation(StackPanel.WidthProperty, animation);
+            }
+        }
+        private void VisibilityTools()
+        {
+            btnDel.Visibility = Visibility.Visible;
+            bEdit.Visibility = Visibility.Visible;
+          
+        }
         private void UpdatePath()
         {
             CreateDate = DateTime.Now;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            btnDel.Visibility = Visibility.Collapsed;
+            bEdit.Visibility = Visibility.Collapsed;
             OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weatherP.Parse());
             imageWeather.Source = open.weather[0].Icon;
             condition.Content = open.weather[0].main;
@@ -58,6 +157,7 @@ namespace Weekly_Diary
             labelPage.Content =$"Page: {pageCount}";
             textDiary.Document.Blocks.Clear();
             textDiary.Focus();
+            
         }
 
      
@@ -71,26 +171,12 @@ namespace Weekly_Diary
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            UpdatePath();
-            saveLoad.Save(listDiary, textDiary,Path,PathList);            
-            textDiary.Document.Blocks.Clear();      
-            pageCount++;
-            labelPage.Content = $"Page: {pageCount}";
-            textDiary.Focus();
+           AddPage();
         }
 
         private void btnDel_Click(object sender, RoutedEventArgs e)
         {
-            string[] files = Directory.GetFiles($"{Environment.CurrentDirectory}\\dataDiary", "*.rtf");
-            File.Delete(files[pageCount-1]);
-            listDiary.Clear();
-            PathList.Clear();
-            pageCount = 1;
-            textDiary = saveLoad.LoadLastPage(listDiary, pageCount - 1, textDiary, PathList);
-            textDiary.Document.Blocks.Clear();
-            pageCount = listDiary.Count + 1;
-            labelPage.Content = $"Page: {pageCount}";
-            textDiary.Focus();
+             DeletePage();
         }
 
         private void btnVoice_Click(object sender, RoutedEventArgs e)
@@ -106,60 +192,29 @@ namespace Weekly_Diary
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            pageCount++;
-            if (pageCount > listDiary.Count)
-            {
-                pageCount = listDiary.Count+1;
-                textDiary.Document.Blocks.Clear();
-                labelPage.Content = $"Page: {pageCount}";
-            }
-            else
-            {
-                labelPage.Content = $"Page: {pageCount}";
-                textDiary.Document = saveLoad.LoadPage(listDiary, pageCount-1, PathList).Document;
-            }
-            textDiary.Focus();
+            NextPage();
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-
+           OkPage();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            pageCount--;
-            if (pageCount < 1)
-            {
-                pageCount = 1;
-            }
-            else
-            {
-                labelPage.Content = $"Page: {pageCount}";
-                textDiary.Document = saveLoad.LoadPage(listDiary, pageCount-1, PathList).Document;
-            }
-            textDiary.Focus();
+            BackPage();
         }
 
         private void bTools_Click(object sender, RoutedEventArgs e)
         {
-            if (istools)
-            {
-                istools = false;
-                pTools.Visibility = Visibility.Hidden;
-            }
-            else
-            {
-                istools=true;
-                pTools.Visibility = Visibility.Visible;
-                DoubleAnimation animation = new DoubleAnimation();
-                animation.From = 0;
-                animation.To = pTools.ActualWidth;
-                animation.Duration = new Duration(TimeSpan.FromSeconds(1));
+            Tools();
+        }
 
-                pTools.BeginAnimation(StackPanel.WidthProperty, animation);
-            }
-          
+        private void bEdit_Click(object sender, RoutedEventArgs e)
+        {
+            textDiary.IsReadOnly = false;
+            bEdit.Visibility = Visibility.Collapsed;
+            btnOk.Visibility = Visibility.Visible;
         }
     }
 }
