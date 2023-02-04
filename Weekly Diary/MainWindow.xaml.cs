@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Linq;
 using System.Drawing;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace Weekly_Diary
 {
@@ -19,23 +20,21 @@ namespace Weekly_Diary
   
     public partial class MainWindow : Window
     {
-        public static DateTime CreateDate { get; set; } = DateTime.Now;
-        private string Path { get { return $"{Environment.CurrentDirectory}\\dataDiary\\data{CreateDate.ToString("yyyy/MM/dd/HH-mm-ss")}.rtf"; } }
+        DateTime CreateDate { get; set; } = DateTime.Now;
+        string Path { get { return $"{Environment.CurrentDirectory}\\dataDiary\\data{CreateDate.ToString("yyyy/MM/dd/HH-mm-ss")}.rtf"; } }
         List<string> PathList = new List<string>();
         PWeather weatherP = new PWeather();
         private List<RichTextBox> listDiary=new List<RichTextBox>();
         int pageCount=1;
         SaveLoad saveLoad = new SaveLoad();
-        int maxPage = 0;
+        bool istools = false;
 
 
        
-
-
         public MainWindow()
         {
             InitializeComponent();
-            
+            pTools.Visibility = Visibility.Hidden;
         }
 
         private void UpdatePath()
@@ -56,7 +55,6 @@ namespace Weekly_Diary
             date.Content = mainDate.ToString("yyyy/MM/dd");
             textDiary =  saveLoad.LoadLastPage(listDiary,pageCount-1,textDiary,PathList);
             pageCount=listDiary.Count+1;
-            maxPage = pageCount;
             labelPage.Content =$"Page: {pageCount}";
             textDiary.Document.Blocks.Clear();
             textDiary.Focus();
@@ -78,13 +76,21 @@ namespace Weekly_Diary
             textDiary.Document.Blocks.Clear();      
             pageCount++;
             labelPage.Content = $"Page: {pageCount}";
-            // File.Delete($"{Environment.CurrentDirectory}\\inkImage.png");
-            maxPage++;
+            textDiary.Focus();
         }
 
         private void btnDel_Click(object sender, RoutedEventArgs e)
         {
-           
+            string[] files = Directory.GetFiles($"{Environment.CurrentDirectory}\\dataDiary", "*.rtf");
+            File.Delete(files[pageCount-1]);
+            listDiary.Clear();
+            PathList.Clear();
+            pageCount = 1;
+            textDiary = saveLoad.LoadLastPage(listDiary, pageCount - 1, textDiary, PathList);
+            textDiary.Document.Blocks.Clear();
+            pageCount = listDiary.Count + 1;
+            labelPage.Content = $"Page: {pageCount}";
+            textDiary.Focus();
         }
 
         private void btnVoice_Click(object sender, RoutedEventArgs e)
@@ -111,7 +117,8 @@ namespace Weekly_Diary
             {
                 labelPage.Content = $"Page: {pageCount}";
                 textDiary.Document = saveLoad.LoadPage(listDiary, pageCount-1, PathList).Document;
-            }              
+            }
+            textDiary.Focus();
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -131,8 +138,29 @@ namespace Weekly_Diary
                 labelPage.Content = $"Page: {pageCount}";
                 textDiary.Document = saveLoad.LoadPage(listDiary, pageCount-1, PathList).Document;
             }
+            textDiary.Focus();
         }
 
+        private void bTools_Click(object sender, RoutedEventArgs e)
+        {
+            if (istools)
+            {
+                istools = false;
+                pTools.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                istools=true;
+                pTools.Visibility = Visibility.Visible;
+                DoubleAnimation animation = new DoubleAnimation();
+                animation.From = 0;
+                animation.To = pTools.ActualWidth;
+                animation.Duration = new Duration(TimeSpan.FromSeconds(1));
+
+                pTools.BeginAnimation(StackPanel.WidthProperty, animation);
+            }
+          
+        }
     }
 }
 

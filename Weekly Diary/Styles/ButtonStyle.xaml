@@ -219,8 +219,8 @@
  <!--#endregion-->
     
 <!--#region Button Ok-->
-    <ImageBrush x:Key="bOkblue" ImageSource="/Image/bOkblue.png"/>
-    <ImageBrush x:Key="bOkpurple" ImageSource="/Image/bOkpurple.png"/>
+    <ImageBrush x:Key="bOkblue" ImageSource="/Image/editBlue.png"/>
+    <ImageBrush x:Key="bOkpurple" ImageSource="/Image/edit.Purple.png"/>
 
     <Style x:Key="ButtonOkStyle" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="35"/>
@@ -248,5 +248,35 @@
         </Setter>
     </Style>
 <!--#endregion-->
+
+    <ImageBrush x:Key="btoolsBlue" ImageSource="/Image/toolsBlue.png" />
+    <ImageBrush x:Key="btoolsPurple" ImageSource="/Image/toolsPurple.png"/>
+
+    <Style x:Key="ButtonToolsPageStyle" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="15 15 15 0"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource btoolsBlue}"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource btoolsPurple}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource btoolsPurple}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--#endregion-->
 
 </ResourceDictionary>

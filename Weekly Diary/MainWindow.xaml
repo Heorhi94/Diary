@@ -18,7 +18,6 @@
         <Border Background="#303135"
                 CornerRadius="10"
                 Opacity="0.95">
-
         </Border>
         <Grid HorizontalAlignment="Right">
             <Grid.RowDefinitions>
@@ -26,49 +25,47 @@
                 <RowDefinition/>
                 <RowDefinition Height="75"/>
             </Grid.RowDefinitions>
+            <Button x:Name="bTools" Grid.Row="2"
+                    Style="{StaticResource ButtonToolsPageStyle}" Click="bTools_Click"></Button>
+            <StackPanel x:Name="pTools" Grid.Row ="2" Orientation="Horizontal" HorizontalAlignment="Left" >
+                <Button x:Name="btnAdd"
+                    Style="{StaticResource ButtonAddStyle}"
+                    Cursor="Hand"
+                    Click="btnAdd_Click" Margin="10,15,10,0"/>
+                <Button x:Name="btnDel"
+                    Style="{StaticResource ButtonDelStyle}"
+                    Click="btnDel_Click" Margin="0,15,10,0"/>
+                <Button x:Name="btnVoice"
+                    Style="{StaticResource ButtonVoicesStyle}"
+                    Click="btnVoice_Click" Margin="0,15,10,0"/>
+                <Button x:Name="btnDraw"
+                    Style="{StaticResource ButtonDrawStyle}"
+                    Click="btnDraw_Click" Margin="0,15,80,0"/>
+                <Button x:Name="btnBack"
+                    Style="{StaticResource ButtonBackPageStyle}"
+                    Click="btnBack_Click" Margin="0,15,10,0"/>
+                <Button x:Name="btnOk"
+                    Style="{StaticResource ButtonOkStyle}"
+                    Click="btnOk_Click" Margin="0,15,10,0"/>
+                <Button x:Name="btnNext"
+                    Style="{StaticResource ButtonNextPageStyle}"
+                    Click="btnNext_Click" Margin="0,15,0,0"/>
+            </StackPanel>
             <Button x:Name="btnClose"
                     Cursor="Hand"
                     Style="{StaticResource ButtonCloseStyle}"
                     Click="btnClose_Click" Height="35" Width="35"/>
-            <Button x:Name="btnAdd"
-                    Style="{StaticResource ButtonAddStyle}"
-                    Grid.Row="2"
-                    Cursor="Hand"
-                    Click="btnAdd_Click"/>
-            <Button x:Name="btnDel"
-                    Style="{StaticResource ButtonDelStyle}"
-                    Grid.Row="2"
-                    Click="btnDel_Click"/>
-            <Button x:Name="btnVoice"
-                    Style="{StaticResource ButtonVoicesStyle}"
-                    Grid.Row="2"
-                    Click="btnVoice_Click"/>
-            <Button x:Name="btnDraw"
-                    Style="{StaticResource ButtonDrawStyle}"
-                    Grid.Row="2"
-                    Click="btnDraw_Click"/>
-            <Button x:Name="btnNext"
-                    Style="{StaticResource ButtonNextPageStyle}"
-                    Grid.Row="2"
-                    Click="btnNext_Click"/>
-            <Button x:Name="btnOk"
-                    Style="{StaticResource ButtonOkStyle}"
-                    Grid.Row="2"
-                    Click="btnOk_Click"/>
-            <Button x:Name="btnBack"
-                    Style="{StaticResource ButtonBackPageStyle}"
-                    Grid.Row="2"
-                    Click="btnBack_Click"/>
+           
             <Label x:Name="condition"
                    Margin="70,8,430,37" 
                    Width="100"
-                   FontFamily="MyFont" Foreground="#FF2564DA"/>
-            <Label x:Name="conditionWeather" Width="100" Height="30" Margin="70,39,430,7" Foreground="#FF2564DA"/>
-            <Label x:Name="temperature" Width="100" Height="30" Margin="172,8,328,37"  Foreground="#FF2564DA"/>
-            <Label x:Name="speedWind" Width="100" Height="30" Margin="172,39,328,7" Foreground="#FF2564DA"/>
-            <Label x:Name="humidity" Width="100" Height="30" Margin="273,8,223,37" Foreground="#FF2564DA"/>
-            <Label x:Name="pressure" Width="100" Height="30" Margin="274,38,223,7" Foreground="#FF2564DA"/>
-            <Label x:Name="date" Width="135" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,80,0" FontSize="24" Foreground="#FF2564DA" FontWeight="Bold"/>
+                   FontFamily="MyFont" Foreground="#FF3FBBFF"/>
+            <Label x:Name="conditionWeather" Width="100" Height="30" Margin="70,39,430,7" Foreground="#FF3FBBFF" Background="#00000000"/>
+            <Label x:Name="temperature" Width="100" Height="30" Margin="172,8,328,37"  Foreground="#FF3FBBFF"/>
+            <Label x:Name="speedWind" Width="100" Height="30" Margin="172,39,328,7" Foreground="#FF3FBBFF"/>
+            <Label x:Name="humidity" Width="100" Height="30" Margin="273,8,223,37" Foreground="#FF3FBBFF"/>
+            <Label x:Name="pressure" Width="100" Height="30" Margin="274,38,223,7" Foreground="#FF3FBBFF"/>
+            <Label x:Name="date" Width="135" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,80,0" FontSize="24" Foreground="#FF3FBBFF" FontWeight="Bold"/>
             <Image x:Name="imageWeather" Width="45" Height="45" Margin="9,8,531,7">
             </Image>
             <Border Grid.Row="1"
@@ -102,12 +99,7 @@
                              HorizontalAlignment="Right"
                              VerticalAlignment="Top"
                              Margin="0,0,50,0"/>
-                </StackPanel>
-            
-           
-
+            </StackPanel>
         </Grid>
-
-
     </Grid>
 </Window>
