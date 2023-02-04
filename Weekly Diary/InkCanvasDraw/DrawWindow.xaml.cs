@@ -22,6 +22,7 @@ namespace Weekly_Diary
         MainWindow mainWindow= new MainWindow();
         Random random = new Random();
         private ColorRGB colorRGB = new ColorRGB();
+        string path = $"{Environment.CurrentDirectory}\\inkImage.png";
 
         public DrawWindow(MainWindow mainWindow)
         {
@@ -40,27 +41,19 @@ namespace Weekly_Diary
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {          
             SaveInkImage();            
         }
 
         public void SaveInkImage()
-        {
-            int val = random.Next(int.MinValue, int.MaxValue);
-            string path = $"{Environment.CurrentDirectory}\\image\\inkImage{val}.png";
-            while (File.Exists(path))
-            {
-                val = random.Next(int.MinValue, int.MaxValue);
-                path = $"{Environment.CurrentDirectory}\\image\\inkImage{val}.png";
-            }
+        {                     
             RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)draw.Width, (int)draw.Height, 96d, 96d, PixelFormats.Pbgra32);
             renderBitmap.Render(draw);
 
             PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
 
-            using (FileStream stream = new FileStream(path, FileMode.Create))
+            using (var stream = new FileStream(path, FileMode.Create))
             {
                 encoder.Save(stream);
             }
@@ -73,7 +66,7 @@ namespace Weekly_Diary
             InlineUIContainer container = new InlineUIContainer(image);
             mainWindow.textDiary.CaretPosition.InsertTextInRun("");
             mainWindow.textDiary.CaretPosition.Paragraph.Inlines.Add(container);
-            Close();
+            this.Close();
         }
 
         private void closeDraw_Click(object sender, RoutedEventArgs e)

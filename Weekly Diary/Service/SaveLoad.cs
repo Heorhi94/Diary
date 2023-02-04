@@ -16,12 +16,11 @@ namespace Weekly_Diary.Service
 {
     class SaveLoad 
     {
-        public void Save(List<RichTextBox> listDiary, int index, RichTextBox textDiary,string Path,List<string>PathList)
+        public void Save(List<RichTextBox> listDiary, RichTextBox textDiary,string Path,List<string>PathList)
         {
         TextRange doc = new TextRange(textDiary.Document.ContentStart, textDiary.Document.ContentEnd);
         using (FileStream fs = File.Create(Path))
-        {
-                    
+        {                  
             doc.Save(fs, DataFormats.Rtf);
         }
         listDiary.Add(textDiary);

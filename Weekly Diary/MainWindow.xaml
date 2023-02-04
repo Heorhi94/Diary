@@ -62,14 +62,13 @@
             <Label x:Name="condition"
                    Margin="70,8,430,37" 
                    Width="100"
-                   Content="sdfsdfsdf\"
                    FontFamily="MyFont" Foreground="#FF2564DA"/>
-            <Label x:Name="conditionWeather" Width="100" Height="30" Margin="70,39,430,7" Content="dfsdvsfdvsf" Foreground="#FF2564DA"/>
-            <Label x:Name="temperature" Width="100" Height="30" Margin="172,8,328,37" Content="asdssd" Foreground="#FF2564DA"/>
-            <Label x:Name="speedWind" Width="100" Height="30" Content="speed wind" Margin="172,39,328,7" Foreground="#FF2564DA"/>
-            <Label x:Name="humidity" Width="100" Height="30" Content="humidity" Margin="273,8,223,37" Foreground="#FF2564DA"/>
-            <Label x:Name="pressure" Width="100" Height="30" Margin="274,38,223,7" Content="pressyre" Foreground="#FF2564DA"/>
-
+            <Label x:Name="conditionWeather" Width="100" Height="30" Margin="70,39,430,7" Foreground="#FF2564DA"/>
+            <Label x:Name="temperature" Width="100" Height="30" Margin="172,8,328,37"  Foreground="#FF2564DA"/>
+            <Label x:Name="speedWind" Width="100" Height="30" Margin="172,39,328,7" Foreground="#FF2564DA"/>
+            <Label x:Name="humidity" Width="100" Height="30" Margin="273,8,223,37" Foreground="#FF2564DA"/>
+            <Label x:Name="pressure" Width="100" Height="30" Margin="274,38,223,7" Foreground="#FF2564DA"/>
+            <Label x:Name="date" Width="135" Height="40" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,15,80,0" FontSize="24" Foreground="#FF2564DA" FontWeight="Bold"/>
             <Image x:Name="imageWeather" Width="45" Height="45" Margin="9,8,531,7">
             </Image>
             <Border Grid.Row="1"

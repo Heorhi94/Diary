@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Windows.Documents;
 using System.Linq;
 using System.Drawing;
+using System.IO;
 
 namespace Weekly_Diary
 {
@@ -25,7 +26,7 @@ namespace Weekly_Diary
         private List<RichTextBox> listDiary=new List<RichTextBox>();
         int pageCount=1;
         SaveLoad saveLoad = new SaveLoad();
-        int index = 0;
+        int maxPage = 0;
 
 
        
@@ -37,7 +38,7 @@ namespace Weekly_Diary
             
         }
 
-        private void UodatePath()
+        private void UpdatePath()
         {
             CreateDate = DateTime.Now;
         }
@@ -51,10 +52,13 @@ namespace Weekly_Diary
             speedWind.Content = "Wiatr " + open.wind.speed.ToString() + " m/s";
             humidity.Content = "Wilgotność " + open.main.humidity.ToString() + "%";
             pressure.Content = "Nacisk " + ((int)open.main.pressure).ToString() + " mm";
-            textDiary =  saveLoad.LoadLastPage(listDiary,index,textDiary,PathList);
-            pageCount+=listDiary.Count;
-            index = pageCount - 1;
+            DateTime mainDate = DateTime.Now;
+            date.Content = mainDate.ToString("yyyy/MM/dd");
+            textDiary =  saveLoad.LoadLastPage(listDiary,pageCount-1,textDiary,PathList);
+            pageCount=listDiary.Count+1;
+            maxPage = pageCount;
             labelPage.Content =$"Page: {pageCount}";
+            textDiary.Document.Blocks.Clear();
             textDiary.Focus();
         }
 
@@ -69,11 +73,13 @@ namespace Weekly_Diary
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            saveLoad.Save(listDiary, index, textDiary,Path,PathList);            
+            UpdatePath();
+            saveLoad.Save(listDiary, textDiary,Path,PathList);            
             textDiary.Document.Blocks.Clear();      
             pageCount++;
-            index++;
             labelPage.Content = $"Page: {pageCount}";
+            // File.Delete($"{Environment.CurrentDirectory}\\inkImage.png");
+            maxPage++;
         }
 
         private void btnDel_Click(object sender, RoutedEventArgs e)
@@ -95,16 +101,16 @@ namespace Weekly_Diary
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             pageCount++;
-            index++;
-            if (pageCount > listDiary.Count+1)
+            if (pageCount > listDiary.Count)
             {
                 pageCount = listDiary.Count+1;
-                index = pageCount - 1;
+                textDiary.Document.Blocks.Clear();
+                labelPage.Content = $"Page: {pageCount}";
             }
             else
             {
                 labelPage.Content = $"Page: {pageCount}";
-                textDiary.Document = saveLoad.LoadPage(listDiary, index, PathList).Document;
+                textDiary.Document = saveLoad.LoadPage(listDiary, pageCount-1, PathList).Document;
             }              
         }
 
@@ -116,16 +122,14 @@ namespace Weekly_Diary
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             pageCount--;
-            index--;
             if (pageCount < 1)
             {
                 pageCount = 1;
-                index = 0;
             }
             else
             {
                 labelPage.Content = $"Page: {pageCount}";
-                textDiary.Document = saveLoad.LoadPage(listDiary, index, PathList).Document;
+                textDiary.Document = saveLoad.LoadPage(listDiary, pageCount-1, PathList).Document;
             }
         }
 
