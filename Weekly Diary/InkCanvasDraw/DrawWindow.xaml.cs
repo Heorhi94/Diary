@@ -20,7 +20,6 @@ namespace Weekly_Diary
     public partial class DrawWindow : Window
     {
         MainWindow mainWindow= new MainWindow();
-        Random random = new Random();
         private ColorRGB colorRGB = new ColorRGB();
         string path = $"{Environment.CurrentDirectory}\\inkImage.png";
 
@@ -71,7 +70,7 @@ namespace Weekly_Diary
 
         private void closeDraw_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void rgbColor_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

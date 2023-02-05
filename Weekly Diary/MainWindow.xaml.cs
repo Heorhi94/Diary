@@ -184,7 +184,7 @@ namespace Weekly_Diary
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.Close();
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
