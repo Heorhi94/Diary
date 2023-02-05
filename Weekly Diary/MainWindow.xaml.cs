@@ -10,6 +10,7 @@ using System.Linq;
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Animation;
+using System.Windows.Input;
 
 namespace Weekly_Diary
 {
@@ -37,6 +38,40 @@ namespace Weekly_Diary
             pTools.Visibility = Visibility.Hidden;
         }
 
+        private void LoadPage()
+        {
+            btnDel.Visibility = Visibility.Collapsed;
+            bEdit.Visibility = Visibility.Collapsed;
+            try
+            {
+                OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weatherP.Parse());
+                imageWeather.Source = open.weather[0].Icon;
+                condition.Content = open.weather[0].main;
+                conditionWeather.Content = open.weather[0].description;
+                temperature.Content = open.main.temp.ToString("0.##") + " °C";
+                speedWind.Content = "Wiatr " + open.wind.speed.ToString() + " m/s";
+                humidity.Content = "Wilgotność " + open.main.humidity.ToString() + "%";
+                pressure.Content = "Nacisk " + ((int)open.main.pressure).ToString() + " mm";
+            }
+            catch
+            {
+                imageWeather.Source = null;
+                condition.Content = null;
+                conditionWeather.Content = null;
+                temperature.Content = null;
+                speedWind.Content = null;
+                humidity.Content = null;
+                pressure.Content = null;
+            }
+
+            DateTime mainDate = DateTime.Now;
+            date.Content = mainDate.ToString("yyyy/MM/dd");
+            textDiary = saveLoad.LoadLastPage(listDiary, pageCount - 1, textDiary, PathList);
+            pageCount = listDiary.Count + 1;
+            labelPage.Content = $"Page: {pageCount}";
+            textDiary.Document.Blocks.Clear();
+            textDiary.Focus();
+        }
 
         private void AddPage()
         {
@@ -60,6 +95,11 @@ namespace Weekly_Diary
             labelPage.Content = $"Page: {pageCount}";
             textDiary.Focus();
             textDiary.IsReadOnly = true;
+            NextPage();
+            if(pageCount == 1)
+            {
+                bEdit.Visibility = Visibility.Collapsed;
+            }
         }
         private void NextPage()
         {
@@ -140,56 +180,29 @@ namespace Weekly_Diary
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            btnDel.Visibility = Visibility.Collapsed;
-            bEdit.Visibility = Visibility.Collapsed;
-            OpenWeather open = JsonConvert.DeserializeObject<OpenWeather>(weatherP.Parse());
-            imageWeather.Source = open.weather[0].Icon;
-            condition.Content = open.weather[0].main;
-            conditionWeather.Content = open.weather[0].description;
-            temperature.Content = open.main.temp.ToString("0.##") + " °C";
-            speedWind.Content = "Wiatr " + open.wind.speed.ToString() + " m/s";
-            humidity.Content = "Wilgotność " + open.main.humidity.ToString() + "%";
-            pressure.Content = "Nacisk " + ((int)open.main.pressure).ToString() + " mm";
-            DateTime mainDate = DateTime.Now;
-            date.Content = mainDate.ToString("yyyy/MM/dd");
-            textDiary =  saveLoad.LoadLastPage(listDiary,pageCount-1,textDiary,PathList);
-            pageCount=listDiary.Count+1;
-            labelPage.Content =$"Page: {pageCount}";
-            textDiary.Document.Blocks.Clear();
-            textDiary.Focus();
-            
+          LoadPage();          
         }
-
-     
-
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-      
-
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
            AddPage();
         }
-
         private void btnDel_Click(object sender, RoutedEventArgs e)
         {
              DeletePage();
         }
-
         private void btnVoice_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         private void btnDraw_Click(object sender, RoutedEventArgs e)
         {
             DrawWindow drawWindow = new DrawWindow(this);
             drawWindow.Show(); 
         }
-
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             NextPage();
@@ -209,12 +222,19 @@ namespace Weekly_Diary
         {
             Tools();
         }
-
         private void bEdit_Click(object sender, RoutedEventArgs e)
         {
             textDiary.IsReadOnly = false;
             bEdit.Visibility = Visibility.Collapsed;
             btnOk.Visibility = Visibility.Visible;
+        }
+
+        private void Window_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Background="Transparent">
+        Background="Transparent" MouseDown="Window_MouseDown">
 
     <Window.Resources>
         <FontFamily x:Key="MyFont">Fonts/beer-money12.ttf#My Font</FontFamily>
@@ -37,7 +37,7 @@
                     Click="btnDel_Click" Margin="0,15,10,0"/>
                 <Button x:Name="btnVoice"
                     Style="{StaticResource ButtonVoicesStyle}"
-                    Click="btnVoice_Click" Margin="0,15,10,0"/>
+                    Click="btnVoice_Click" Margin="0,15,10,0" Visibility="Collapsed"/>
                 <Button x:Name="btnDraw"
                     Style="{StaticResource ButtonDrawStyle}"
                     Click="btnDraw_Click" Margin="0,15,80,0"/>
