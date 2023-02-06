@@ -19,7 +19,7 @@ namespace Weekly_Diary
     
     public partial class DrawWindow : Window
     {
-        MainWindow mainWindow= new MainWindow();
+        MainWindow mainWindow;
         private ColorRGB colorRGB = new ColorRGB();
         string path = $"{Environment.CurrentDirectory}\\inkImage.png";
 
