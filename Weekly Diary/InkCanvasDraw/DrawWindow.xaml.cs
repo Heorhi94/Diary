@@ -21,8 +21,6 @@ namespace Weekly_Diary
     {
         MainWindow mainWindow;
         private ColorRGB colorRGB = new ColorRGB();
-        string path = $"{Environment.CurrentDirectory}\\inkImage.png";
-
         public DrawWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -43,9 +41,10 @@ namespace Weekly_Diary
         {          
             SaveInkImage();            
         }
-
-        public void SaveInkImage()
-        {                     
+        private void SaveInkImage()
+        {
+            mainWindow.UpdatePath();
+            string path = $"{Environment.CurrentDirectory}\\img\\inkImage{mainWindow.CreateDate.ToString("yyyy/MM/dd/HH-mm-ss")}.png";
             RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)draw.Width, (int)draw.Height, 96d, 96d, PixelFormats.Pbgra32);
             renderBitmap.Render(draw);
 

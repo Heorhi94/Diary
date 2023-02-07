@@ -21,7 +21,7 @@ namespace Weekly_Diary
   
     public partial class MainWindow : Window
     {
-        DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; } = DateTime.Now;
         string Path { get { return $"{Environment.CurrentDirectory}\\dataDiary\\data{CreateDate.ToString("yyyy/MM/dd/HH-mm-ss")}.rtf"; } }
         List<string> PathList = new List<string>();
         PWeather weatherP = new PWeather();
@@ -174,7 +174,7 @@ namespace Weekly_Diary
             bEdit.Visibility = Visibility.Visible;
           
         }
-        private void UpdatePath()
+        public void UpdatePath()
         {
             CreateDate = DateTime.Now;
         }
@@ -185,6 +185,12 @@ namespace Weekly_Diary
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+           /* DirectoryInfo dirInfo = new DirectoryInfo($"{Environment.CurrentDirectory}\\img\\");
+
+            foreach (FileInfo file in dirInfo.GetFiles())
+            {
+                file.Delete();
+            }*/
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
