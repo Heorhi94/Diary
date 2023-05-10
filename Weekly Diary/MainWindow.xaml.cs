@@ -185,12 +185,12 @@ namespace Weekly_Diary
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-           /* DirectoryInfo dirInfo = new DirectoryInfo($"{Environment.CurrentDirectory}\\img\\");
+            DirectoryInfo dirInfo = new DirectoryInfo($"{Environment.CurrentDirectory}\\img\\");
 
             foreach (FileInfo file in dirInfo.GetFiles())
             {
                 file.Delete();
-            }*/
+            }
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
