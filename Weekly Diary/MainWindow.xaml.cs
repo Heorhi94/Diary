@@ -22,12 +22,13 @@ namespace Weekly_Diary
     public partial class MainWindow : Window
     {
         public DateTime CreateDate { get; set; } = DateTime.Now;
-        string Path { get { return $"{Environment.CurrentDirectory}\\dataDiary\\data{CreateDate.ToString("yyyy/MM/dd/HH-mm-ss")}.rtf"; } }
-        List<string> PathList = new List<string>();
-        PWeather weatherP = new PWeather();
-        private List<RichTextBox> listDiary=new List<RichTextBox>();
+        string Path { get { return $"{Environment.CurrentDirectory}\\dataDiary\\data{CreateDate:yyyy/MM/dd/HH-mm-ss}.rtf"; } }
+
+        readonly List<string> PathList = new List<string>();
+        readonly PWeather weatherP = new PWeather();
+        private readonly List<RichTextBox> listDiary=new List<RichTextBox>();
         int pageCount=1;
-        SaveLoad saveLoad = new SaveLoad();
+        readonly SaveLoad saveLoad = new SaveLoad();
         bool istools = false;
 
 
@@ -160,11 +161,12 @@ namespace Weekly_Diary
             {
                 istools = true;
                 pTools.Visibility = Visibility.Visible;
-                DoubleAnimation animation = new DoubleAnimation();
-                animation.From = 0;
-                animation.To = pTools.ActualWidth;
-                animation.Duration = new Duration(TimeSpan.FromSeconds(1));
-
+                DoubleAnimation animation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = pTools.ActualWidth,
+                    Duration = new Duration(TimeSpan.FromSeconds(1))
+                };
                 pTools.BeginAnimation(StackPanel.WidthProperty, animation);
             }
         }
@@ -182,7 +184,7 @@ namespace Weekly_Diary
         {
           LoadPage();          
         }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             DirectoryInfo dirInfo = new DirectoryInfo($"{Environment.CurrentDirectory}\\img\\");
@@ -192,43 +194,43 @@ namespace Weekly_Diary
                 file.Delete();
             }
         }
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
            AddPage();
         }
-        private void btnDel_Click(object sender, RoutedEventArgs e)
+        private void BtnDel_Click(object sender, RoutedEventArgs e)
         {
              DeletePage();
         }
-        private void btnVoice_Click(object sender, RoutedEventArgs e)
+        private void BtnVoice_Click(object sender, RoutedEventArgs e)
         {
 
         }
-        private void btnDraw_Click(object sender, RoutedEventArgs e)
+        private void BtnDraw_Click(object sender, RoutedEventArgs e)
         {
             DrawWindow drawWindow = new DrawWindow(this);
             drawWindow.Show(); 
         }
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
             NextPage();
         }
 
-        private void btnOk_Click(object sender, RoutedEventArgs e)
+        private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
            OkPage();
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             BackPage();
         }
 
-        private void bTools_Click(object sender, RoutedEventArgs e)
+        private void BTools_Click(object sender, RoutedEventArgs e)
         {
             Tools();
         }
-        private void bEdit_Click(object sender, RoutedEventArgs e)
+        private void BEdit_Click(object sender, RoutedEventArgs e)
         {
             textDiary.IsReadOnly = false;
             bEdit.Visibility = Visibility.Collapsed;

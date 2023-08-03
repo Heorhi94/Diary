@@ -26,44 +26,44 @@
                 <RowDefinition Height="75"/>
             </Grid.RowDefinitions>
             <Button x:Name="bTools" Grid.Row="2"  Cursor="Hand"
-                    Style="{StaticResource ButtonToolsPageStyle}" Click="bTools_Click"></Button>
+                    Style="{StaticResource ButtonToolsPageStyle}" Click="BTools_Click"></Button>
             <StackPanel x:Name="pTools" Grid.Row ="2" Orientation="Horizontal" HorizontalAlignment="Left" Width="450" Margin="0,-3,0,0" >
                 <Button x:Name="btnAdd"
                     Style="{StaticResource ButtonAddStyle}"
                     Cursor="Hand"
-                    Click="btnAdd_Click"  Margin="10,15,10,0"/>
+                    Click="BtnAdd_Click"  Margin="10,15,10,0"/>
                 <Button x:Name="btnDel"
                          Cursor="Hand"
                     Style="{StaticResource ButtonDelStyle}"
-                    Click="btnDel_Click" Margin="0,15,10,0"/>
+                    Click="BtnDel_Click" Margin="0,15,10,0"/>
                 <Button x:Name="btnVoice"  Cursor="Hand"
                     Style="{StaticResource ButtonVoicesStyle}"
-                    Click="btnVoice_Click" Margin="0,15,10,0" Visibility="Collapsed"/>
+                    Click="BtnVoice_Click" Margin="0,15,10,0" Visibility="Collapsed"/>
                 <Button x:Name="btnDraw"
                          Cursor="Hand"
                     Style="{StaticResource ButtonDrawStyle}"
-                    Click="btnDraw_Click" Margin="0,15,80,0"/>
+                    Click="BtnDraw_Click" Margin="0,15,80,0"/>
                 <Button x:Name="btnBack"
                          Cursor="Hand"
                     Style="{StaticResource ButtonBackPageStyle}"
-                    Click="btnBack_Click" Margin="0,15,10,0"/>
+                    Click="BtnBack_Click" Margin="0,15,10,0"/>
                 <Button x:Name="btnOk"
                          Cursor="Hand"
                     Style="{StaticResource ButtonOkStyle}"
-                    Click="btnOk_Click" Margin="0,15,0,0" Visibility="Collapsed"/>
+                    Click="BtnOk_Click" Margin="0,15,0,0" Visibility="Collapsed"/>
                 <Button x:Name="bEdit"
                          Cursor="Hand"
                         Style="{StaticResource ButtonEditStyle}" Margin="0,15,0,0"
-                        Click="bEdit_Click"/>
+                        Click="BEdit_Click"/>
                 <Button x:Name="btnNext"  Cursor="Hand"
                     Style="{StaticResource ButtonNextPageStyle}"
-                    Click="btnNext_Click" Margin="10,15,0,0"/>
+                    Click="BtnNext_Click" Margin="10,15,0,0"/>
                 
             </StackPanel>
             <Button x:Name="btnClose"
                     Cursor="Hand"
                     Style="{StaticResource ButtonCloseStyle}"
-                    Click="btnClose_Click" Height="35" Width="35"/>
+                    Click="BtnClose_Click" Height="35" Width="35"/>
            
             <Label x:Name="condition"
                    Margin="70,8,430,37" 

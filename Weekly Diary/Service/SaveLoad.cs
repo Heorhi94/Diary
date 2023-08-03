@@ -23,7 +23,7 @@ namespace Weekly_Diary.Service
         {                  
             doc.Save(fs, DataFormats.Rtf);
         }
-        listDiary.Add(textDiary);
+         listDiary.Add(textDiary);
          PathList.Add(Path);    
         }
 
