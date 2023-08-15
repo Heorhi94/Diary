@@ -183,10 +183,7 @@ namespace Weekly_Diary
             bEdit.Visibility = Visibility.Visible;
           
         }
-        public void UpdatePath()
-        {
-            CreateDate = DateTime.Now;
-        }
+        public void UpdatePath() => CreateDate = DateTime.Now;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
           LoadPage();          
