@@ -10,8 +10,33 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Weekly_Diary.ParseWeather
 {
-      class PWeather
+    class PWeather
     {
+
+
+        /*   public string Parse(string lat, string lon)
+           {
+               string apiKey = "3da0baf6af9aff062bdc4aeb2e321174";
+               WebRequest request = WebRequest.Create($"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}");
+               request.Method = "POST";
+               request.ContentType = "application/x-www-urlencoded";
+
+               WebResponse response = request.GetResponse();
+               string answer = string.Empty;
+
+               using (Stream s = response.GetResponseStream())
+               {
+                   using (StreamReader reader = new StreamReader(s))
+                   {
+                       answer = reader.ReadToEnd();
+                   }
+               }
+               response.Close();
+               return answer;
+           } */
+
+
+
         public string Parse()
         {
             WebRequest request = WebRequest.Create("https://api.openweathermap.org/data/2.5/weather?q=Biala Podlaska&APPID=3da0baf6af9aff062bdc4aeb2e321174");
@@ -21,9 +46,9 @@ namespace Weekly_Diary.ParseWeather
             WebResponse response = request.GetResponse();
             string answer = string.Empty;
 
-            using(Stream s = response.GetResponseStream())
+            using (Stream s = response.GetResponseStream())
             {
-                using(StreamReader reader = new StreamReader(s))
+                using (StreamReader reader = new StreamReader(s))
                 {
                     answer = reader.ReadToEnd();
                 }
@@ -31,7 +56,8 @@ namespace Weekly_Diary.ParseWeather
             response.Close();
             return answer;
         }
-        
-        
+
+
     }
+    
 }

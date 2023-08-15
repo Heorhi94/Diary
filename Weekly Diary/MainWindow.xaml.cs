@@ -31,7 +31,6 @@ namespace Weekly_Diary
         readonly SaveLoad saveLoad = new SaveLoad();
         bool istools = false;
 
-
        
         public MainWindow()
         {
