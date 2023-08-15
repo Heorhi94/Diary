@@ -29,6 +29,8 @@ namespace Weekly_Diary.Service
 
         public RichTextBox LoadLastPage(List<RichTextBox> listDiary, int index,RichTextBox textDiary,List<string>PathList)
         {
+            
+
             string[] files = Directory.GetFiles($"{Environment.CurrentDirectory}\\dataDiary", "*.rtf");
             string Path;
             int count = files.Length;

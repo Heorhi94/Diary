@@ -41,6 +41,14 @@ namespace Weekly_Diary
 
         private void LoadPage()
         {
+            string directoryPathImg = $"{Environment.CurrentDirectory}\\img";
+            string directoryPathData = $"{Environment.CurrentDirectory}\\dataDiary";
+
+            if (!Directory.Exists(directoryPathImg) || !Directory.Exists(directoryPathData))
+            {
+                Directory.CreateDirectory(directoryPathImg);
+                Directory.CreateDirectory(directoryPathData);
+            }
             btnDel.Visibility = Visibility.Collapsed;
             bEdit.Visibility = Visibility.Collapsed;
             try
